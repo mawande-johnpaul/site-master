@@ -1,0 +1,48 @@
+@import './components/header.css';
+@import './components/chat.css';
+@import './components/modal.css';
+
+@font-face {
+  font-family: 'DM-SansSerif';
+  src: url('DMSerifText-Regular.ttf') format('truetype');
+  font-style: normal;
+}
+
+
+#root {
+  display: flex;
+  margin: 0;
+  font-family: 'DM-SansSerif', sans-serif;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  --secondary: #ff0051;
+  --primary: #570000;
+  --onprimary: var(--surface);
+  --text: #333333;
+  --border: #666;
+  --surface: #f7f7f7;
+  --background: #fff;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+main {
+  height: inherit;
+  width: 100%;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--background);
+}
+
+

@@ -1,0 +1,77 @@
+.chat {
+    margin: 0 auto;
+    width: 60%;
+    height: 89%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background);
+}
+
+.search-bar {
+    position: fixed;
+    bottom: 2rem;
+    width: 40%;
+    padding: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    background-color: var(--surface);
+    border-radius: 10px;
+}
+
+.search-bar input {
+    border: 2px solid var(--surface);
+    background-color: var(--surface);
+    font-family: inherit;
+    flex: 1;
+    height: 2rem;
+    overflow-wrap: anywhere;
+}
+
+.search-bar input:active {
+    border: 2px solid var(--surface);
+    background-color: var(--surface);
+    font-family: inherit;
+}
+
+.search-bar button {
+    border-radius: 5px;
+    border: none;
+    background-color: var(--primary);
+    color: var(--onprimary);
+    font-family: inherit;
+    padding: 0 2rem;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    transform: scale(1.05);
+    transition: ease-in-out 0.1s;
+}
+
+.default-response {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    flex: 1;
+    text-align: center;
+}
+
+.default-response h5 {
+    color: #333;
+}
+
+.response {
+    width: 80%;
+    height: inherit;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2rem;
+    border: 1px solid;
+}
+
+
+
