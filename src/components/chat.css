@@ -10,13 +10,26 @@
 
 .search-bar {
     position: fixed;
-    bottom: 2rem;
-    width: 40%;
+    bottom: 15vh;
+    width: 60%;
     padding: 0.5rem;
     display: flex;
     gap: 1rem;
     background-color: var(--surface);
     border-radius: 10px;
+}
+
+.select-helper {
+    min-width: 10%;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    border-radius: 8px;
+}
+
+.select-helper option{
+    border: none;
+    padding: 0.5rem 1.2rem;
 }
 
 .search-bar input {
@@ -28,7 +41,8 @@
     overflow-wrap: anywhere;
 }
 
-.search-bar input:active {
+.search-bar input:focus {
+    outline: none;
     border: 2px solid var(--surface);
     background-color: var(--surface);
     font-family: inherit;
@@ -52,7 +66,7 @@
 .default-response {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     padding: 2rem;
     flex: 1;
     text-align: center;
@@ -60,18 +74,66 @@
 
 .default-response h5 {
     color: #333;
+    margin-bottom: 0;
 }
 
 .response {
     width: 80%;
     height: inherit;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     padding: 2rem;
-    border: 1px solid;
+    margin-bottom: 24vh;
+    transition: all 0.5s ease;
 }
 
+.user-bubble, .ai-bubble {
+    padding: 1rem;
+    width: fit-content;
+    max-width: 80%;
+    margin-bottom: 1rem;
+    transition: all 0.5s ease;
+}
+
+.user-bubble {
+    border-radius: 10px 10px 10px 0;
+    align-self: flex-start;
+    background-color: var(--surface);
+}
+
+.ai-bubble {
+    border-radius: 10px 10px 0px 10px;
+    align-self: baseline;
+    margin-left: auto;
+    background-color: var(--primarylight);
+}
+
+.product-slider {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    gap: 1rem;
+}
+
+.product {
+    background-color: var(--surface);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.product img{
+    max-width: 200px;
+    border-radius: 0.5rem;
+}
+
+.label {
+font-size: 1.25rem;
+text-overflow: ellipsis;
+}
 
 

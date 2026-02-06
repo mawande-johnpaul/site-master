@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 
 function Chat() {
-  const [query, setQuery] = useState("");
-  const { chat, setChat } = useAppContext();
+  const { chat, setChat, query, setQuery, helpers } = useAppContext();
+  const [selectedHelper, setSelectedHelper] = useState(undefined);
+
+  function ProductSlider({products}) {
+    return (
+      <div className="product-slider">
+        {products.map((product, i) => {
+          return <div className="product" key={i}>
+            <img src={product.img} />
+            <div className="label">{product.name}</div>
+          </div>;
+        })}
+      </div>
+    );
+  }
 
   function Response() {
     return (
@@ -11,12 +24,24 @@ function Chat() {
         {chat.map((chatMessage) => (
           <MessageComponent message={chatMessage} key={chatMessage} />
         ))}
+        
       </div>
     );
   }
 
   function MessageComponent({ message }) {
-    return <div className="message">{message.message}</div>;
+    return (
+      <div>
+        {message.sender == "user" ? (
+          <div className="user-bubble">{message.query}</div>
+        ) : (
+          <div className="ai-bubble">
+            <p>{message.message}</p>
+            <ProductSlider products={message.products} />
+          </div>
+        )}
+      </div>
+    );
   }
 
   function DefaultResponse() {
@@ -24,39 +49,78 @@ function Chat() {
       <div className="default-response">
         <h1>Find, compare and review products with AI.</h1>
         <h5>Describe what you want naturally.</h5>
+        <h5>Simplify product details.</h5>
+        <h5>Search by reason.</h5>
+        <h5>Summarize reviews.</h5>
       </div>
     );
   }
 
   function getResponse(query) {
-    return [
+    if (chat == null) {
+      setChat([]);
+      setHistory((prevItems) => [
+      ...prevItems,
+      chat
+    ]);
+    }
+    setChat((prevItems) => [
+      ...prevItems,
       {
+        sender: "user",
         query: query,
-        message: "Here is what i found",
-        products: ["Prod1", "Prod2", "Prod3"],
       },
-    ];
+    ]);
+
+    setChat((prevItems) => [
+      ...prevItems,
+      {
+        sender: "ai",
+        message: "Here is what i found",
+        products: [
+          { name: "Prod1", img: "image.jpeg", desc: "A compelling product" },
+          { name: "Prod2", img: "image.jpeg", desc: "A compelling product" },
+          { name: "Prod3", img: "image.jpeg", desc: "A compelling product" },
+        ],
+      },
+    ]);
+    setQuery("");
   }
 
   return (
     <div className="chat">
-      {chat == null ? <DefaultResponse /> : <Response />}
-      <div className="search-bar">
+      {chat == null || chat == undefined ? <DefaultResponse /> : <Response />}
+      <form
+        className="search-bar"
+        onSubmit={(e) => {
+          e.preventDefault();
+          getResponse(query);
+        }}
+      >
+        <select
+          className="select-helper"
+          value={selectedHelper}
+          onChange={(e) => setSelectedHelper(e.target.value)}
+        >
+          {helpers.map((helper) => {
+            return (
+              <option style={{ cursor: "pointer" }} key={helper.name}>
+                {helper.name}
+              </option>
+            );
+          })}
+        </select>
         <input
+          id="prompt"
+          type="text"
+          value={query}
           placeholder="What are you looking for?"
           onChange={(event) => {
-            event.preventDefault();
-            setQuery(event.value);
+            setQuery(event.target.value);
           }}
         />
-        <button
-          onClick={() => {
-            setChat(getResponse(query));
-          }}
-        >
-          Search
-        </button>
-      </div>
+        <button type="submit">Search</button>
+      </form>
     </div>
   );
 }

@@ -12,25 +12,15 @@ header {
 }
 
 .logo {
-  height: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.logo-text {
-  font-size: 28px;
-  letter-spacing: 3px;
+  font-size: 2rem;
   font-weight: bolder;
-}
-
-.logo img {
-  height: inherit;
+  color: var(--primary);
+  cursor: pointer;
+  padding: 0 1rem;
 }
 
 .actions {
-  padding: 0 2rem;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,15 +33,21 @@ header {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: var(--background);
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
 }
 
 .action:hover {
-  background-color: var(--primary);
+  background-color: var(--background);
   transition: ease-in-out 0.1s;
-  transform: scale(1.1);
+  transform: scale(1.03);
+  color: var(--primary);
+}
+
+.action.active {
+  background-color: var(--primary);
+  transform: scale(1.03);
+  transition: ease-in-out 0.3s;
   color: var(--onprimary);
 }
