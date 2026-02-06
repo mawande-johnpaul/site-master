@@ -1,139 +1,195 @@
 .chat {
-    margin: 0 auto;
-    width: 60%;
-    height: 89%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--background);
+  margin: 0 auto;
+  width: 60%;
+  height: 89%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--background);
 }
 
 .search-bar {
-    position: fixed;
-    bottom: 15vh;
-    width: 60%;
-    padding: 0.5rem;
-    display: flex;
-    gap: 1rem;
-    background-color: var(--surface);
-    border-radius: 10px;
+  position: fixed;
+  bottom: 15vh;
+  width: 60%;
+  padding: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  background-color: var(--surface);
+  border-radius: 10px;
 }
 
 .select-helper {
-    min-width: 10%;
-    border: none;
-    outline: none;
-    font-family: inherit;
-    border-radius: 8px;
+  min-width: 10%;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  border-radius: 8px;
 }
 
-.select-helper option{
-    border: none;
-    padding: 0.5rem 1.2rem;
+.select-helper option {
+  border: none;
+  padding: 0.5rem 1.2rem;
 }
 
 .search-bar input {
-    border: 2px solid var(--surface);
-    background-color: var(--surface);
-    font-family: inherit;
-    flex: 1;
-    height: 2rem;
-    overflow-wrap: anywhere;
+  border: 2px solid var(--surface);
+  background-color: var(--surface);
+  font-family: inherit;
+  flex: 1;
+  height: 2rem;
+  overflow-wrap: anywhere;
 }
 
 .search-bar input:focus {
-    outline: none;
-    border: 2px solid var(--surface);
-    background-color: var(--surface);
-    font-family: inherit;
+  outline: none;
+  border: 2px solid var(--surface);
+  background-color: var(--surface);
+  font-family: inherit;
 }
 
 .search-bar button {
-    border-radius: 5px;
-    border: none;
-    background-color: var(--primary);
-    color: var(--onprimary);
-    font-family: inherit;
-    padding: 0 2rem;
-    cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--primary);
+  color: var(--onprimary);
+  font-family: inherit;
+  padding: 0 2rem;
+  cursor: pointer;
 }
 
 .search-bar button:hover {
-    transform: scale(1.05);
-    transition: ease-in-out 0.1s;
+  transform: scale(1.05);
+  transition: ease-in-out 0.1s;
 }
 
 .default-response {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    padding: 2rem;
-    flex: 1;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 2rem;
+  flex: 1;
+  text-align: center;
 }
 
 .default-response h5 {
-    color: #333;
-    margin-bottom: 0;
+  color: #333;
+  margin-bottom: 0;
 }
 
 .response {
-    width: 80%;
-    height: inherit;
-    overflow-x: hidden;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 2rem;
-    margin-bottom: 24vh;
-    transition: all 0.5s ease;
+  width: 80%;
+  height: inherit;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2rem;
+  margin-bottom: 24vh;
+  transition: all 0.5s ease;
 }
 
-.user-bubble, .ai-bubble {
-    padding: 1rem;
-    width: fit-content;
-    max-width: 80%;
-    margin-bottom: 1rem;
-    transition: all 0.5s ease;
+.user-bubble,
+.ai-bubble {
+  padding: 1rem;
+  width: fit-content;
+  max-width: 80%;
+  margin-bottom: 1rem;
+  transition: all 0.5s ease;
 }
 
 .user-bubble {
-    border-radius: 10px 10px 10px 0;
-    align-self: flex-start;
-    background-color: var(--surface);
+  border-radius: 10px 10px 10px 0;
+  align-self: flex-start;
+  background-color: var(--surface);
 }
 
 .ai-bubble {
-    border-radius: 10px 10px 0px 10px;
-    align-self: baseline;
-    margin-left: auto;
-    background-color: var(--primarylight);
+  border-radius: 10px 10px 0px 10px;
+  align-self: baseline;
+  margin-left: auto;
+  background-color: var(--primarylight);
 }
 
 .product-slider {
-    display: flex;
-    width: 100%;
-    overflow-x: auto;
-    gap: 1rem;
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  gap: 1rem;
 }
 
 .product {
-    background-color: var(--surface);
-    padding: 0.5rem;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
-    cursor: pointer;
+  background-color: var(--surface);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.product img{
-    max-width: 200px;
-    border-radius: 0.5rem;
+.product img {
+  max-width: 200px;
+  border-radius: 0.5rem;
+}
+
+.product h3 {
+  color: var(--primary);
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  margin: 0.5rem 0;
 }
 
 .label {
-font-size: 1.25rem;
-text-overflow: ellipsis;
+  margin: 0.3rem 0;
+  font-size: 1.25rem;
+  text-overflow: ellipsis;
 }
 
+.product-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
+}
 
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #00000032;
+  color: white;
+  transition: all 0.3s;
+}
+
+.icon-btn:hover {
+  background-color: #00000050;
+  transform: scale(1.1);
+}
+
+.icon-btn.wishlist.active {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.icon-btn.cart {
+  background-color: #3498db;
+}
+
+.icon-btn.cart:hover {
+  background-color: #2980b9;
+}
+
+.favorite-icon {
+  background-color: #00000032;
+  color: white;
+  border-radius: 50%;
+  padding: 8px;
+}

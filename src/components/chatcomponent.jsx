@@ -1,18 +1,78 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
+import { TbHeart, TbShoppingCart } from "react-icons/tb";
 
 function Chat() {
-  const { chat, setChat, query, setQuery, helpers } = useAppContext();
+  const {
+    chat,
+    setChat,
+    query,
+    setQuery,
+    helpers,
+    setHistory,
+    setWishlist,
+    wishlist,
+    setCart,
+    cart,
+  } = useAppContext();
+  const navigate = useNavigate();
   const [selectedHelper, setSelectedHelper] = useState(undefined);
 
-  function ProductSlider({products}) {
+  function ProductSlider({ products }) {
+    const toggleWishlist = (product, e) => {
+      e.stopPropagation();
+      const isWishlisted = wishlist.some((item) => item.id === product.id);
+      if (isWishlisted) {
+        setWishlist(wishlist.filter((item) => item.id !== product.id));
+      } else {
+        setWishlist([...wishlist, product]);
+      }
+    };
+
+    const addToCart = (product, e) => {
+      e.stopPropagation();
+      const isInCart = cart.some((item) => item.id === product.id);
+      if (!isInCart) {
+        setCart([...cart, { ...product, quantity: 1 }]);
+      }
+    };
+
     return (
       <div className="product-slider">
         {products.map((product, i) => {
-          return <div className="product" key={i}>
-            <img src={product.img} />
-            <div className="label">{product.name}</div>
-          </div>;
+          const isWishlisted = wishlist.some((item) => item.id === product.id);
+          return (
+            <div
+              className="product"
+              key={i}
+              onClick={() => navigate(`/product/${product.id}`)}
+            >
+              <img src={product.img} />
+              <div className="label">{product.name}</div>
+              <h3>USD {product.price.toLocaleString()}</h3>
+              <div className="product-actions">
+                <button
+                  className={`icon-btn wishlist ${isWishlisted ? "active" : ""}`}
+                  onClick={(e) => toggleWishlist(product, e)}
+                  title="Add to wishlist"
+                >
+                  <TbHeart
+                    className="favorite-icon"
+                    size={20}
+                    fill={isWishlisted ? "currentColor" : "none"}
+                  />
+                </button>
+                <button
+                  className="icon-btn cart"
+                  onClick={(e) => addToCart(product, e)}
+                  title="Add to cart"
+                >
+                  <TbShoppingCart size={20} />
+                </button>
+              </div>
+            </div>
+          );
         })}
       </div>
     );
@@ -24,7 +84,6 @@ function Chat() {
         {chat.map((chatMessage) => (
           <MessageComponent message={chatMessage} key={chatMessage} />
         ))}
-        
       </div>
     );
   }
@@ -59,10 +118,7 @@ function Chat() {
   function getResponse(query) {
     if (chat == null) {
       setChat([]);
-      setHistory((prevItems) => [
-      ...prevItems,
-      chat
-    ]);
+      setHistory((prevItems) => [...prevItems, chat]);
     }
     setChat((prevItems) => [
       ...prevItems,
@@ -78,9 +134,30 @@ function Chat() {
         sender: "ai",
         message: "Here is what i found",
         products: [
-          { name: "Prod1", img: "image.jpeg", desc: "A compelling product" },
-          { name: "Prod2", img: "image.jpeg", desc: "A compelling product" },
-          { name: "Prod3", img: "image.jpeg", desc: "A compelling product" },
+          {
+            id: 1,
+            name: "Prod1",
+            img: "image.jpeg",
+            desc: "A compelling product",
+            price: 30000,
+            rating: 3,
+          },
+          {
+            id: 2,
+            name: "Prod2",
+            img: "image.jpeg",
+            desc: "A compelling product",
+            price: 50000,
+            rating: 5,
+          },
+          {
+            id: 3,
+            name: "Prod3",
+            img: "image.jpeg",
+            desc: "A compelling product",
+            price: 28000,
+            rating: 4,
+          },
         ],
       },
     ]);

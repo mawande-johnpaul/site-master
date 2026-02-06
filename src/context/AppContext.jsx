@@ -9,8 +9,67 @@ import {
 
 const AppContext = createContext();
 
+// Hardcoded products database
+const PRODUCTS_DB = [
+  {
+    id: 1,
+    name: "Prod1",
+    img: "image.jpeg",
+    desc: "A compelling product that offers great value",
+    price: 30000,
+    rating: 3,
+    reviews: 45,
+    category: "Electronics",
+    specs: "High quality, durable",
+  },
+  {
+    id: 2,
+    name: "Prod2",
+    img: "image.jpeg",
+    desc: "Premium quality product with excellent reviews",
+    price: 50000,
+    rating: 5,
+    reviews: 120,
+    category: "Electronics",
+    specs: "Best in class performance",
+  },
+  {
+    id: 3,
+    name: "Prod3",
+    img: "image.jpeg",
+    desc: "Affordable yet reliable option",
+    price: 28000,
+    rating: 4,
+    reviews: 80,
+    category: "Electronics",
+    specs: "Good value for money",
+  },
+  {
+    id: 4,
+    name: "Prod4",
+    img: "image.jpeg",
+    desc: "Latest model with advanced features",
+    price: 75000,
+    rating: 5,
+    reviews: 200,
+    category: "Tech",
+    specs: "Next generation technology",
+  },
+  {
+    id: 5,
+    name: "Prod5",
+    img: "image.jpeg",
+    desc: "Budget-friendly alternative",
+    price: 15000,
+    rating: 3.5,
+    reviews: 60,
+    category: "Electronics",
+    specs: "Basic but functional",
+  },
+];
+
 export function AppProvider({ children }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [chat, setChat] = useState(null);
   const [history, setHistory] = useState([]);
@@ -21,6 +80,8 @@ export function AppProvider({ children }) {
   const [query, setQuery] = useState("");
   const [infoSeen, setInfoSeen] = useState(false);
   const [cookieSeen, setCookieSeen] = useState(false);
+  const [products] = useState(PRODUCTS_DB);
+  const [currentProduct, setCurrentProduct] = useState(null);
 
   const [helperOptions, setHelperOptions] = useState({
     name: "",
@@ -115,6 +176,9 @@ export function AppProvider({ children }) {
         setHelperOptions,
         helpers,
         setHelpers,
+        products,
+        currentProduct,
+        setCurrentProduct,
       }}
     >
       {children}

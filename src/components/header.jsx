@@ -5,6 +5,9 @@ import {
   TbStar,
   TbRobot,
   TbShoppingBag,
+  TbTrash,
+  TbClearAll,
+  TbX,
 } from "react-icons/tb";
 import Modal from "../components/modal";
 import Cookies from "../components/cookies";
@@ -14,9 +17,162 @@ import { useAppContext } from "../context/AppContext";
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { setModalChildren, setIsOpen, modalChildren, cookieSeen, isOpen } = useAppContext();
+  const {
+    setModalChildren,
+    setIsOpen,
+    modalChildren,
+    cookieSeen,
+    isOpen,
+    history,
+    wishlist,
+    cart,
+    setCart,
+    setWishlist,
+  } = useAppContext();
 
   const isActive = (path) => location.pathname === path;
+
+  function History() {
+    return (
+      <div>
+        <div className="modal-header">
+          <h2>History</h2>
+          <TbTrash />
+        </div>
+        <div className="history-list">
+          {history && history.length > 0 ? (
+            history.map((item, i) => {
+              return (
+                <div className="history-item" key={i}>
+                  <h5>10/10/2026 - 12:45PM</h5>
+                  <p>{item && item[0] ? item[0].query : "Search query"}</p>
+                </div>
+              );
+            })
+          ) : (
+            <p>No history yet</p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  function Wishlist() {
+    return (
+      <div>
+        <div className="modal-header">
+          <h2>Wishlist ({wishlist.length})</h2>
+          <button
+            onClick={() => setWishlist([])}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "1.2rem",
+            }}
+          >
+            <TbClearAll />
+          </button>
+        </div>
+        <div className="wishlist-list">
+          {wishlist && wishlist.length > 0 ? (
+            wishlist.map((item, i) => {
+              return (
+                <div className="wishlist-item" key={i}>
+                  <div>
+                    <h5>{item.name}</h5>
+                    <p>USD ${item.price.toLocaleString()}</p>
+                  </div>
+                  <button
+                    onClick={() =>
+                      setWishlist(wishlist.filter((w) => w.id !== item.id))
+                    }
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <TbX />
+                  </button>
+                </div>
+              );
+            })
+          ) : (
+            <p>No items in wishlist</p>
+          )}
+        </div>
+        {wishlist.length > 0 && (
+          <button className="default-button" style={{ width: "100%", marginTop: "1rem" }}>
+            Add All to Cart
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  function Cart() {
+    const total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+
+    return (
+      <div>
+        <div className="modal-header">
+          <h2>Cart ({cart.length})</h2>
+          <button
+            onClick={() => setCart([])}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "1.2rem",
+            }}
+          >
+            <TbClearAll />
+          </button>
+        </div>
+        <div className="cart-list">
+          {cart && cart.length > 0 ? (
+            <>
+              {cart.map((item, i) => {
+                return (
+                  <div className="cart-item" key={i}>
+                    <div>
+                      <h5>{item.name}</h5>
+                      <p>USD ${item.price.toLocaleString()}</p>
+                      <p style={{ fontSize: "0.9rem", color: "#999" }}>
+                        Qty: {item.quantity || 1}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() =>
+                        setCart(cart.filter((c) => c.id !== item.id))
+                      }
+                      style={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <TbX />
+                    </button>
+                  </div>
+                );
+              })}
+              <div className="cart-total">
+                <h4>Total: USD ${total.toLocaleString()}</h4>
+                <button className="default-button" style={{ width: "100%" }}>
+                  Checkout
+                </button>
+              </div>
+            </>
+          ) : (
+            <p>No items in cart</p>
+          )}
+        </div>
+      </div>
+    );
+  }
+  
 
   return (
     <header>
@@ -28,7 +184,7 @@ function Header() {
         <div
           className={`action ${isActive("/history") ? "active" : ""}`}
           onClick={() => {
-            setModalChildren(<h3>History</h3>);
+            setModalChildren(<History />);
             setIsOpen(true);
           }}
         >
@@ -39,7 +195,7 @@ function Header() {
         <div
           className={`action ${isActive("/wishlist") ? "active" : ""}`}
           onClick={() => {
-            setModalChildren(<h3>Wishlist</h3>);
+            setModalChildren(<Wishlist />);
             setIsOpen(true);
           }}
         >
@@ -50,7 +206,7 @@ function Header() {
         <div
           className={`action ${isActive("/cart") ? "active" : ""}`}
           onClick={() => {
-            setModalChildren(<h3>Cart</h3>);
+            setModalChildren(<Cart />);
             setIsOpen(true);
           }}
         >
