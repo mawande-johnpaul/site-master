@@ -45,7 +45,6 @@ body {
 main {
   height: inherit;
   width: 100%;
-  overflow-y: auto;
 }
 
 .main-content {
@@ -58,7 +57,7 @@ main {
 
 .helper-content {
   margin: 0 auto;
-  min-height: 100vh;
+  overflow: scroll;
   padding-bottom: 4rem;
 }
 
@@ -407,4 +406,17 @@ main {
   cursor: pointer;
 }
 
+
+@media screen and (max-width: 800px) {
+  .cookies {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    font-size: 0.7rem;
+  }
+
+  .cookies button {
+    padding: 0.5rem 1rem;
+  }
+}
 

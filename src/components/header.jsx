@@ -8,7 +8,10 @@ import {
   TbTrash,
   TbClearAll,
   TbX,
+  TbMenu,
+  TbMenu2,
 } from "react-icons/tb";
+import { useState } from "react";
 import Modal from "../components/modal";
 import Cookies from "../components/cookies";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -31,13 +34,14 @@ function Header() {
   } = useAppContext();
 
   const isActive = (path) => location.pathname === path;
+  const [isExpanded, setIsExpanded] = useState(false);
 
   function History() {
     return (
       <div>
         <div className="modal-header">
           <h2>History</h2>
-          <TbTrash className="icon-btn"/>
+          <TbTrash className="icon-btn" />
         </div>
         <div className="history-list">
           {history && history.length > 0 ? (
@@ -71,7 +75,7 @@ function Header() {
               fontSize: "1.2rem",
             }}
           >
-            <TbClearAll className="icon-btn"/>
+            <TbClearAll className="icon-btn" />
           </button>
         </div>
         <div className="wishlist-list">
@@ -93,7 +97,7 @@ function Header() {
                       cursor: "pointer",
                     }}
                   >
-                    <TbX className="icon-btn"/>
+                    <TbX className="icon-btn" />
                   </button>
                 </div>
               );
@@ -103,7 +107,10 @@ function Header() {
           )}
         </div>
         {wishlist.length > 0 && (
-          <button className="default-button" style={{ width: "100%", marginTop: "1rem" }}>
+          <button
+            className="default-button"
+            style={{ width: "100%", marginTop: "1rem" }}
+          >
             Add All to Cart
           </button>
         )}
@@ -112,7 +119,10 @@ function Header() {
   }
 
   function Cart() {
-    const total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+    const total = cart.reduce(
+      (sum, item) => sum + item.price * (item.quantity || 1),
+      0,
+    );
 
     return (
       <div>
@@ -127,7 +137,7 @@ function Header() {
               fontSize: "1.2rem",
             }}
           >
-            <TbClearAll className="icon-btn"/>
+            <TbClearAll className="icon-btn" />
           </button>
         </div>
         <div className="cart-list">
@@ -172,7 +182,6 @@ function Header() {
       </div>
     );
   }
-  
 
   return (
     <header>
@@ -215,16 +224,16 @@ function Header() {
         </div>
       </div>
 
-      <div className="actions">
+      <div className="actions-trailing">
         <div
-          className={`action ${isActive("/") ? "active" : ""}`}
+          className={`action-trailing ${isActive("/") ? "active" : ""}`}
           onClick={() => navigate("/")}
         >
           <TbShoppingBag size={20} />
           <div>Home</div>
         </div>
         <div
-          className={`action ${isActive("/helpers") ? "active" : ""}`}
+          className={`action-trailing ${isActive("/helpers") ? "active" : ""}`}
           onClick={() => navigate("/helpers")}
         >
           <TbRobot size={20} />
@@ -232,13 +241,54 @@ function Header() {
         </div>
 
         <div
-          className={`action ${isActive("/account") ? "active" : ""}`}
+          className={`action-trailing ${isActive("/account") ? "active" : ""}`}
           onClick={() => navigate("/account")}
         >
           <TbUser size={20} />
           <div>Account</div>
         </div>
+        <div className={`menu-btn`} onClick={() => setIsExpanded(!isExpanded)}>
+          <TbMenu2 size={22} />
+        </div>
       </div>
+
+      <div className={"mobile-menu" + (isExpanded ? " open" : "")}>
+        <div
+          className={`action-trailing ${isActive("/") ? "active" : ""}`}
+          style={{ display: "flex", width: "70%" }}
+          onClick={() => {
+            navigate("/");
+            setIsExpanded(false);
+          }}
+        >
+          <TbShoppingBag size={20} />
+          <div>Home</div>
+        </div>
+        <div
+          className={`action-trailing ${isActive("/helpers") ? "active" : ""}`}
+          style={{ display: "flex" }}
+          onClick={() => {
+            navigate("/helpers");
+            setIsExpanded(false);
+          }}
+        >
+          <TbRobot size={20} />
+          <div>Helpers</div>
+        </div>
+
+        <div
+          className={`action-trailing ${isActive("/account") ? "active" : ""}`}
+          style={{ display: "flex" }}
+          onClick={() => {
+            navigate("/account");
+            setIsExpanded(false);
+          }}
+        >
+          <TbUser size={20} />
+          <div>Account</div>
+        </div>
+      </div>
+
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         {modalChildren}
       </Modal>
