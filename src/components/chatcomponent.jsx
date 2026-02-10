@@ -21,6 +21,7 @@ function Chat() {
 
   function ProductSlider({ products }) {
     const toggleWishlist = (product, e) => {
+      e.preventDefault();
       e.stopPropagation();
       const isWishlisted = wishlist.some((item) => item.id === product.id);
       if (isWishlisted) {
@@ -31,9 +32,12 @@ function Chat() {
     };
 
     const addToCart = (product, e) => {
+      e.preventDefault();
       e.stopPropagation();
       const isInCart = cart.some((item) => item.id === product.id);
-      if (!isInCart) {
+      if (isInCart) {
+        setCart(cart.filter((item) => item.id !== product.id));
+      } else {
         setCart([...cart, { ...product, quantity: 1 }]);
       }
     };
@@ -51,25 +55,17 @@ function Chat() {
               <img src={product.img} />
               <div className="label">{product.name}</div>
               <h3>USD {product.price.toLocaleString()}</h3>
-              <div className="product-actions">
-                <button
+              <div className="product-card-actions">
+                <TbHeart
                   className={`icon-btn wishlist ${isWishlisted ? "active" : ""}`}
                   onClick={(e) => toggleWishlist(product, e)}
-                  title="Add to wishlist"
-                >
-                  <TbHeart
-                    className="favorite-icon"
-                    size={20}
-                    fill={isWishlisted ? "currentColor" : "none"}
-                  />
-                </button>
-                <button
-                  className="icon-btn cart"
+                  fill={isWishlisted ? "currentColor" : "none"}
+                />
+                <TbShoppingCart
+                  className={`icon-btn cart ${cart.some((item) => item.id === product.id) ? "active" : ""}`}
                   onClick={(e) => addToCart(product, e)}
-                  title="Add to cart"
-                >
-                  <TbShoppingCart size={20} />
-                </button>
+                  fill={isWishlisted ? "currentColor" : "none"}
+                />
               </div>
             </div>
           );

@@ -21,7 +21,7 @@
   --onprimary: var(--surface);
   --text: #333333;
   --border: #666;
-  --surface: #f7f7f7;
+  --surface: #eaeaea;
   --background: #fff;
   --primarylight: #00235722;
 }
@@ -45,6 +45,7 @@ body {
 main {
   height: inherit;
   width: 100%;
+  overflow-y: auto;
 }
 
 .main-content {
@@ -57,12 +58,14 @@ main {
 
 .helper-content {
   margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
+  padding-bottom: 4rem;
 }
 
 .helpers {
   width: 60%;
   margin: 0 auto;
+  padding-bottom: 2rem;
 }
 
 .helper-list {
@@ -126,6 +129,87 @@ main {
   border: 2px solid var(--primary);
   background-color: var(--primary);
   color: var(--onprimary);
+}
+
+.helper-details {
+  background-color: var(--surface);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+.helper-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.75rem;
+  border: 2px solid var(--primarylight);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  background-color: var(--background);
+  color: var(--text);
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--primary);
+}
+
+.icon-preview {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background-color: var(--primarylight);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  width: fit-content;
+}
+
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 2px solid var(--primarylight);
+  background-color: transparent;
+  color: var(--primary);
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tag-btn:hover {
+  transform: scale(1.05);
+}
+
+.tag-btn.active {
+  background-color: var(--primary);
+  color: var(--onprimary);
+  border-color: var(--primary);
 }
 
 .info-bar {

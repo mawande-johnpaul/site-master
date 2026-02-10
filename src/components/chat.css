@@ -8,6 +8,19 @@
   background-color: var(--background);
 }
 
+.chat::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 4px;
+}
+
 .search-bar {
   position: fixed;
   bottom: 15vh;
@@ -119,6 +132,19 @@
   gap: 1rem;
 }
 
+.product-slider::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.product-slider::-webkit-scrollbar {
+  height: 8px;
+}
+
+.product-slider::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 4px;
+}
+
 .product {
   background-color: var(--surface);
   padding: 0.5rem;
@@ -127,7 +153,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 0.3rem;
 }
 
 .product img {
@@ -139,57 +165,51 @@
   color: var(--primary);
   font-size: 1.8rem;
   letter-spacing: 1px;
-  margin: 0.5rem 0;
+  margin: 0px 0px;
 }
 
 .label {
-  margin: 0.3rem 0;
   font-size: 1.25rem;
   text-overflow: ellipsis;
 }
 
-.product-actions {
+.product-card-actions {
   display: flex;
   gap: 0.5rem;
-  justify-content: center;
+  margin-top: auto;
   width: 100%;
+  margin-top: 0;
 }
 
 .icon-btn {
-  background: none;
-  border: none;
   cursor: pointer;
   padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: #00000032;
-  color: white;
+  border-radius: 10px;
+  background-color: var(--primarylight);
+  color: var(--primary);
   transition: all 0.3s;
 }
 
-.icon-btn:hover {
-  background-color: #00000050;
+.icon-btn:hover, .icon-btn.cart:hover {
   transform: scale(1.1);
 }
 
-.icon-btn.wishlist.active {
-  background-color: #e74c3c;
-  color: white;
+.icon-btn.wishlist.active, .icon-btn.cart.active {
+  background-color: var(--primary);
+  color: var(--onprimary);
 }
 
 .icon-btn.cart {
-  background-color: #3498db;
+  background-color: var(--primarylight);
 }
 
-.icon-btn.cart:hover {
-  background-color: #2980b9;
-}
+@media screen and (max-width: 768px) {
+  .chat {
+    width: 90%;
+  }
 
-.favorite-icon {
-  background-color: #00000032;
-  color: white;
-  border-radius: 50%;
-  padding: 8px;
+  .search-bar {
+    width: 90%;
+    bottom: 20vh;
+  }
 }

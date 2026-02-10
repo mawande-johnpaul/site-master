@@ -37,7 +37,7 @@ function Header() {
       <div>
         <div className="modal-header">
           <h2>History</h2>
-          <TbTrash />
+          <TbTrash className="icon-btn"/>
         </div>
         <div className="history-list">
           {history && history.length > 0 ? (
@@ -71,7 +71,7 @@ function Header() {
               fontSize: "1.2rem",
             }}
           >
-            <TbClearAll />
+            <TbClearAll className="icon-btn"/>
           </button>
         </div>
         <div className="wishlist-list">
@@ -93,7 +93,7 @@ function Header() {
                       cursor: "pointer",
                     }}
                   >
-                    <TbX />
+                    <TbX className="icon-btn"/>
                   </button>
                 </div>
               );
@@ -127,7 +127,7 @@ function Header() {
               fontSize: "1.2rem",
             }}
           >
-            <TbClearAll />
+            <TbClearAll className="icon-btn"/>
           </button>
         </div>
         <div className="cart-list">
