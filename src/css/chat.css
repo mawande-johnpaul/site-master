@@ -1,0 +1,72 @@
+.chat {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.default-response, .chat-response {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  flex: 1;
+  gap: 8px;
+  flex: 1 0 auto; /* Grow to fill, don't shrink */
+}
+
+.default-response {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    text-align: center;
+}
+
+.features {
+    max-width: 70%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface);
+    padding: 8px;
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 14px;
+    height: 3rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+    .chat {
+        height: calc(100% - 1vh);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .features {
+        max-width: 100%;
+    }
+
+    .feature {
+        font-size: 12px;
+        height: 2rem;
+    }
+
+    .default-response h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+}
+

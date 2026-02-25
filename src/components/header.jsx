@@ -1,298 +1,218 @@
-import {
-  TbShoppingCart,
-  TbHistory,
-  TbUser,
-  TbStar,
-  TbRobot,
-  TbShoppingBag,
-  TbTrash,
-  TbClearAll,
-  TbX,
-  TbMenu,
-  TbMenu2,
-} from "react-icons/tb";
-import { useState } from "react";
-import Modal from "../components/modal";
-import Cookies from "../components/cookies";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { TbHeart, TbShoppingCart, TbUser } from "react-icons/tb";
 import { useAppContext } from "../context/AppContext";
+import Modal from "./modal";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
-  const navigate = useNavigate();
-  const location = useLocation();
   const {
+    isAuthenticated,
+    user,
     setModalChildren,
     setIsOpen,
-    modalChildren,
-    cookieSeen,
-    isOpen,
-    history,
-    wishlist,
     cart,
-    setCart,
+    wishlist,
     setWishlist,
+    setCart,
   } = useAppContext();
 
-  const isActive = (path) => location.pathname === path;
-  const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
 
-  function History() {
-    return (
-      <div>
-        <div className="modal-header">
-          <h2>History</h2>
-          <TbTrash className="icon-btn" />
-        </div>
-        <div className="history-list">
-          {history && history.length > 0 ? (
-            history.map((item, i) => {
-              return (
-                <div className="history-item" key={i}>
-                  <h5>10/10/2026 - 12:45PM</h5>
-                  <p>{item && item[0] ? item[0].query : "Search query"}</p>
-                </div>
-              );
-            })
-          ) : (
-            <p>No history yet</p>
-          )}
-        </div>
-      </div>
-    );
+  function openModal(content) {
+    setModalChildren(content);
+    setIsOpen(true);
   }
 
-  function Wishlist() {
-    return (
-      <div>
-        <div className="modal-header">
-          <h2>Wishlist ({wishlist.length})</h2>
-          <button
-            onClick={() => setWishlist([])}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "1.2rem",
-            }}
-          >
-            <TbClearAll className="icon-btn" />
-          </button>
-        </div>
-        <div className="wishlist-list">
-          {wishlist && wishlist.length > 0 ? (
-            wishlist.map((item, i) => {
-              return (
-                <div className="wishlist-item" key={i}>
-                  <div>
-                    <h5>{item.name}</h5>
-                    <p>USD ${item.price.toLocaleString()}</p>
+  function handleHelperClick() {
+    // Logic to open helper modal or dropdown
+  }
+
+  function handleCartClick() {
+    const removeFromCart = (productId) => {
+      setCart(cart.filter((item) => item.id !== productId));
+    };
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+    openModal(
+      <div style={{ maxHeight: '70vh', overflow: 'auto' }}>
+        <h2 style={{ marginBottom: '1rem' }}>Shopping Cart</h2>
+        {cart.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          <>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {cart.map((item) => (
+                <div
+                  key={item.id}
+                  style={{
+                    display: 'flex',
+                    gap: '1rem',
+                    padding: '1rem',
+                    border: '1px solid var(--border, #ddd)',
+                    borderRadius: '8px',
+                    alignItems: 'center',
+                  }}
+                >
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }}
+                  />
+                  <div style={{ flex: 1 }}>
+                    <h4 style={{ margin: '0 0 0.5rem 0' }}>{item.name}</h4>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)' }}>
+                      ${item.price.toLocaleString()}
+                    </p>
                   </div>
                   <button
-                    onClick={() =>
-                      setWishlist(wishlist.filter((w) => w.id !== item.id))
-                    }
+                    onClick={() => removeFromCart(item.id)}
                     style={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
+                      padding: '0.5rem 1rem',
+                      background: 'var(--error, #FF4C4C)',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
                     }}
                   >
-                    <TbX className="icon-btn" />
+                    Remove
                   </button>
                 </div>
-              );
-            })
-          ) : (
-            <p>No items in wishlist</p>
-          )}
-        </div>
-        {wishlist.length > 0 && (
-          <button
-            className="default-button"
-            style={{ width: "100%", marginTop: "1rem" }}
-          >
-            Add All to Cart
-          </button>
+              ))}
+            </div>
+            <div
+              style={{
+                marginTop: '1.5rem',
+                padding: '1rem',
+                borderTop: '2px solid var(--border, #ddd)',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                fontSize: '1.2rem',
+                fontWeight: 'bold',
+              }}
+            >
+              <span>Total:</span>
+              <span>${total.toLocaleString()}</span>
+            </div>
+          </>
         )}
       </div>
     );
   }
 
-  function Cart() {
-    const total = cart.reduce(
-      (sum, item) => sum + item.price * (item.quantity || 1),
-      0,
-    );
+  function handleProfileClick() {
+    navigate('/profile')
+  }
 
-    return (
-      <div>
-        <div className="modal-header">
-          <h2>Cart ({cart.length})</h2>
-          <button
-            onClick={() => setCart([])}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "1.2rem",
-            }}
-          >
-            <TbClearAll className="icon-btn" />
-          </button>
-        </div>
-        <div className="cart-list">
-          {cart && cart.length > 0 ? (
-            <>
-              {cart.map((item, i) => {
-                return (
-                  <div className="cart-item" key={i}>
-                    <div>
-                      <h5>{item.name}</h5>
-                      <p>USD ${item.price.toLocaleString()}</p>
-                      <p style={{ fontSize: "0.9rem", color: "#999" }}>
-                        Qty: {item.quantity || 1}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() =>
-                        setCart(cart.filter((c) => c.id !== item.id))
-                      }
-                      style={{
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <TbX />
-                    </button>
-                  </div>
-                );
-              })}
-              <div className="cart-total">
-                <h4>Total: USD ${total.toLocaleString()}</h4>
-                <button className="default-button" style={{ width: "100%" }}>
-                  Checkout
-                </button>
+  function handleWishlistClick() {
+    const removeFromWishlist = (productId) => {
+      setWishlist(wishlist.filter((item) => item.id !== productId));
+    };
+
+    const addToCart = (product) => {
+      if (!cart.find((item) => item.id === product.id)) {
+        setCart([...cart, product]);
+      }
+    };
+
+    openModal(
+      <div style={{ maxHeight: '70vh', overflow: 'auto' }}>
+        <h2 style={{ marginBottom: '1rem' }}>Wishlist</h2>
+        {wishlist.length === 0 ? (
+          <p>Your wishlist is empty.</p>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {wishlist.map((item) => (
+              <div
+                key={item.id}
+                style={{
+                  display: 'flex',
+                  gap: '1rem',
+                  padding: '1rem',
+                  border: '1px solid var(--border, #ddd)',
+                  borderRadius: '8px',
+                  alignItems: 'center',
+                }}
+              >
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }}
+                />
+                <div style={{ flex: 1 }}>
+                  <h4 style={{ margin: '0 0 0.5rem 0' }}>{item.name}</h4>
+                  <p style={{ margin: 0, color: 'var(--text-secondary)' }}>
+                    ${item.price.toLocaleString()}
+                  </p>
+                  <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                    Rating: {item.rating}⭐ ({item.reviews} reviews)
+                  </p>
+                </div>
+                <div style={{ display: 'flex', gap: '0.5rem', flexDirection: 'column' }}>
+                  <button
+                    onClick={() => {
+                      addToCart(item);
+                      removeFromWishlist(item.id);
+                    }}
+                    style={{
+                      padding: '0.5rem 1rem',
+                      background: 'var(--primary)',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    onClick={() => removeFromWishlist(item.id)}
+                    style={{
+                      padding: '0.5rem 1rem',
+                      background: 'transparent',
+                      color: 'var(--text-primary)',
+                      border: '1px solid var(--border, #ddd)',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
-            </>
-          ) : (
-            <p>No items in cart</p>
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     );
   }
 
   return (
     <header>
-      <div className="logo" onClick={() => navigate("/")}>
-        DICE.com
-      </div>
-
+      <div className="logo"
+      onClick={() => navigate('/')}
+      >DICE</div>
       <div className="actions">
-        <div
-          className={`action ${isActive("/history") ? "active" : ""}`}
-          onClick={() => {
-            setModalChildren(<History />);
-            setIsOpen(true);
-          }}
-        >
-          <TbHistory size={20} />
-          <div>History</div>
-        </div>
-
-        <div
-          className={`action ${isActive("/wishlist") ? "active" : ""}`}
-          onClick={() => {
-            setModalChildren(<Wishlist />);
-            setIsOpen(true);
-          }}
-        >
-          <TbStar size={20} />
-          <div>Wishlist</div>
-        </div>
-
-        <div
-          className={`action ${isActive("/cart") ? "active" : ""}`}
-          onClick={() => {
-            setModalChildren(<Cart />);
-            setIsOpen(true);
-          }}
-        >
-          <TbShoppingCart size={20} />
-          <div>Cart</div>
-        </div>
+        <button className="helper-button" onClick={handleHelperClick}>
+          Helpers
+        </button>
+        <TbHeart size={20} onClick={handleWishlistClick} />
+        <TbShoppingCart size={20} onClick={handleCartClick} />
+        {isAuthenticated ? (
+          <img
+            src={user.avatar}
+            alt="User Avatar"
+            className="avatar"
+            onClick={handleProfileClick}
+          />
+        ) : (
+          <TbUser size={20} onClick={handleProfileClick} />
+        )}
       </div>
-
-      <div className="actions-trailing">
-        <div
-          className={`action-trailing ${isActive("/") ? "active" : ""}`}
-          onClick={() => navigate("/")}
-        >
-          <TbShoppingBag size={20} />
-          <div>Home</div>
-        </div>
-        <div
-          className={`action-trailing ${isActive("/helpers") ? "active" : ""}`}
-          onClick={() => navigate("/helpers")}
-        >
-          <TbRobot size={20} />
-          <div>Helpers</div>
-        </div>
-
-        <div
-          className={`action-trailing ${isActive("/account") ? "active" : ""}`}
-          onClick={() => navigate("/account")}
-        >
-          <TbUser size={20} />
-          <div>Account</div>
-        </div>
-        <div className={`menu-btn`} onClick={() => setIsExpanded(!isExpanded)}>
-          <TbMenu2 size={22} />
-        </div>
-      </div>
-
-      <div className={"mobile-menu" + (isExpanded ? " open" : "")}>
-        <div
-          className={`action-trailing ${isActive("/") ? "active" : ""}`}
-          style={{ display: "flex", width: "70%" }}
-          onClick={() => {
-            navigate("/");
-            setIsExpanded(false);
-          }}
-        >
-          <TbShoppingBag size={20} />
-          <div>Home</div>
-        </div>
-        <div
-          className={`action-trailing ${isActive("/helpers") ? "active" : ""}`}
-          style={{ display: "flex" }}
-          onClick={() => {
-            navigate("/helpers");
-            setIsExpanded(false);
-          }}
-        >
-          <TbRobot size={20} />
-          <div>Helpers</div>
-        </div>
-
-        <div
-          className={`action-trailing ${isActive("/account") ? "active" : ""}`}
-          style={{ display: "flex" }}
-          onClick={() => {
-            navigate("/account");
-            setIsExpanded(false);
-          }}
-        >
-          <TbUser size={20} />
-          <div>Account</div>
-        </div>
-      </div>
-
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        {modalChildren}
-      </Modal>
-      {cookieSeen ? <></> : <Cookies />}
+      <Modal onClose={() => setIsOpen(false)} />
     </header>
   );
 }

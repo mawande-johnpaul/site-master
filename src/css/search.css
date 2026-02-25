@@ -1,0 +1,165 @@
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  margin: 0 auto;
+  flex: 0 1 auto;
+  box-sizing: border-box;
+}
+
+.search-bar .options {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 8px;
+  background: var(--background);
+  border-radius: 8px 8px 0 0;
+  border: 1px solid var(--border, #dddddd);
+  border-bottom: none;
+}
+
+.search-bar .trailing {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  align-items: center;
+}
+
+.search-bar .trailing button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 20px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+}
+
+.search-bar .trailing button:hover {
+  background: var(--primarylight, rgba(255, 215, 0, 0.15));
+}
+
+.search-bar .trailing button:active {
+  transform: scale(0.95);
+}
+
+.search-bar .trailing .send-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+.search-bar .trailing .send-button:hover {
+  background: var(--primary);
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.search-bar .trailing .send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: scale(1);
+}
+
+.search-input-container {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  background: var(--background);
+  border: 1px solid var(--border, #dddddd);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 4px 16px 16px 16px;
+  transition: all 0.2s ease;
+}
+
+.search-bar textarea {
+  width: 100%;
+  min-height: 24px;
+  max-height: calc(1.5em * 5);
+  padding: 8px 0;
+  border: none !important;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.5;
+  outline: none !important;
+  resize: none;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.search-bar textarea:focus {
+  outline: 1px solid var(--border) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.search-bar textarea:active {
+  outline: 1px solid var(--border);
+  border: 1px solid var(--border) !important;
+}
+
+.search-bar textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.search-bar textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-bar textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.search-bar textarea::-webkit-scrollbar-thumb {
+  background: var(--border, #dddddd);
+  border-radius: 3px;
+}
+
+.search-bar textarea::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .search-bar {
+    max-width: 100%;
+  }
+
+  .search-bar .options {
+    padding: 10px 12px;
+  }
+
+  .search-bar select {
+    min-width: 100px;
+    font-size: 13px;
+  }
+
+  .search-bar .trailing button {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .search-input-container {
+    padding: 4px 12px 12px 12px;
+  }
+
+  .search-bar textarea {
+    font-size: 15px;
+  }
+}

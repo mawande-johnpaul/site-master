@@ -1,16 +1,15 @@
-import Chat from "../components/chatcomponent";
+import Chat from "../components/chat";
 import Header from "../components/header";
 
 function Home() {
-
-  return (
-    <main>
-      <Header />
-      <section className="main-content">
-        <Chat />
-      </section>
-    </main>
-  );
+    return ( 
+        <>
+            <Header />
+            <main>
+                <Chat />
+            </main>
+        </>
+     );
 }
 
 export default Home;

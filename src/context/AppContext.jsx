@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import {
   TbBrain,
   TbCrown,
@@ -68,6 +68,23 @@ const PRODUCTS_DB = [
   },
 ];
 
+const THEME = {
+  light: {
+    primary: "#0A192F",
+    surface: "#FFFFFF",
+    textPrimary: "#121212",
+    textSecondary: "#333333",
+    background: "#F5F5F5",
+  },
+  dark: {
+    primary: "#FFD700",
+    surface: "#1E1E1E",
+    textPrimary: "#f5f5f5",
+    textSecondary: "#CCCCCC",
+    background: "#121212",
+  },
+};
+
 export function AppProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -80,8 +97,26 @@ export function AppProvider({ children }) {
   const [query, setQuery] = useState("");
   const [infoSeen, setInfoSeen] = useState(false);
   const [cookieSeen, setCookieSeen] = useState(false);
+  const [theme, setTheme] = useState("light");
   const [products] = useState(PRODUCTS_DB);
   const [currentProduct, setCurrentProduct] = useState(null);
+
+  // Apply theme colors to CSS variables
+  useEffect(() => {
+    const root = document.documentElement;
+    const colors = THEME[theme];
+    
+    root.style.setProperty('--primary', colors.primary);
+    root.style.setProperty('--secondary', colors.secondary);
+    root.style.setProperty('--surface', colors.surface);
+    root.style.setProperty('--text-primary', colors.textPrimary);
+    root.style.setProperty('--text-secondary', colors.textSecondary);
+    root.style.setProperty('--background', colors.background);
+    root.style.setProperty('--error', '#FF4C4C'); // Consistent error color
+    root.style.setProperty('--success', '#4CAF50'); // Consistent success color
+    root.style.setProperty('--warning', '#FFC107'); // Consistent warning color
+    root.style.setProperty('--info', '#2196F3'); // Consistent info color
+  }, [theme]);
 
   const [helperOptions, setHelperOptions] = useState({
     name: "",
@@ -179,6 +214,9 @@ export function AppProvider({ children }) {
         products,
         currentProduct,
         setCurrentProduct,
+        theme,
+        setTheme,
+        themeColors: THEME[theme],
       }}
     >
       {children}
