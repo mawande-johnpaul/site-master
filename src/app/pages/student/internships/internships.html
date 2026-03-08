@@ -1,0 +1,112 @@
+<div
+  class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200 flex min-h-screen"
+>
+  <app-sidebar></app-sidebar>
+  <main class="flex-1 ml-64 p-8">
+    <div class="flex items-stretch gap-2 my-4">
+      <input class="field-input" />
+      <button class="btn-primary">
+        <span class="material-symbols-outlined text-[18px]">search</span>
+        Search
+      </button>
+    </div>
+    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+      <div class="flex flex-wrap items-end gap-3 justify-start">
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1"
+            >Work Setting</label
+          >
+          <select class="filter-select w-fit min-w-[120px]">
+            <option>All Types</option>
+            <option>Remote</option>
+            <option>On-site</option>
+            <option>Hybrid</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1"
+            >Payment</label
+          >
+          <select class="filter-select w-fit min-w-[120px]">
+            <option>Any Status</option>
+            <option>Paid</option>
+            <option>Unpaid</option>
+            <option>Verified Only</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1"
+            >Duration</label
+          >
+          <select class="filter-select w-fit min-w-[120px]">
+            <option>Any Length</option>
+            <option>Short-term</option>
+            <option>Long-term</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1"
+            >Reach</label
+          >
+          <select class="filter-select w-fit min-w-[120px]">
+            <option>Global</option>
+            <option>Local (Uganda)</option>
+          </select>
+        </div>
+
+        <button
+          class="h-[38px] px-4 text-sm font-medium text-gray-500 hover:text-red-500 transition-colors"
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+    <table class="data-table mt-4">
+      <thead class="data-table-head">
+        <tr>
+          <th class="data-table-th">Company</th>
+          <th class="data-table-th">Role</th>
+          <th class="data-table-th">Location</th>
+          <th class="data-table-th">Slots</th>
+          <th class="data-table-th">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (app of pagedListings(); track app.id) {
+          <tr class="data-table-row">
+            <td class="data-table-td">
+              <div class="flex items-center gap-3">
+                <div class="company-avatar" [style.background-color]="app.avatarColor">
+                  {{ app.company[0] }}
+                </div>
+                <span class="font-semibold text-slate-900 dark:text-white">{{ app.company }}</span>
+              </div>
+            </td>
+            <td class="data-table-td">{{ app.role }}</td>
+            <td class="data-table-td">{{ app.location }}</td>
+            <td class="data-table-td">
+              <span>{{ app.slots }} slot{{ app.slots > 1 ? 's' : '' }}</span>
+            </td>
+            <td class="data-table-td">
+                <span>{{ app.postedDate }}</span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div class="table-footer p-4">
+      <span>Showing {{ page() * pageSize + 1 }}–{{ page() * pageSize + pagedListings().length }} of {{ context.listings().length }} listings</span>
+      <div class="flex items-center gap-1">
+        <button class="pagination-btn" (click)="prevPage()" [disabled]="page() === 0">
+          <span class="material-symbols-outlined text-[16px]">chevron_left</span>
+        </button>
+        <button class="pagination-btn" (click)="nextPage()" [disabled]="page() === totalPages() - 1">
+          <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+        </button>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,169 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap');
+
+@import 'tailwindcss';
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-header: 'Inter', sans-serif;
+  --font-body: 'Public Sans', sans-serif;
+
+  --color-primary: #ec5b13;
+  --color-background-light: #f8f6f6;
+  --color-background-dark: #221610;
+
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
+
+body {
+  font-family: var(--font-body );
+  background-color: #000;
+  color: white;
+  margin: 0;
+}
+
+/* ── Component utilities ───────────────────────────── */
+
+@utility card {
+  @apply bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm;
+}
+
+@utility page-heading {
+  @apply text-3xl font-black tracking-tight text-slate-900 dark:text-white;
+}
+
+@utility page-subheading {
+  @apply text-slate-500 dark:text-slate-400 mt-1;
+}
+
+@utility section-heading {
+  @apply text-xl font-bold;
+}
+
+@utility section-header {
+  @apply flex items-center gap-3 mb-6 justify-between;
+}
+
+@utility field-label {
+  @apply block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2;
+}
+
+@utility field-input {
+  @apply w-full rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus:ring-primary focus:border-primary px-4 py-3 border-2;
+}
+
+@utility tag {
+  @apply px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold flex items-center gap-1;
+}
+
+@utility doc-card {
+  @apply flex items-center gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 cursor-pointer hover:border-primary/50 transition-all;
+}
+
+@utility step-label {
+  @apply text-[10px] font-bold uppercase tracking-wider mb-1;
+}
+
+@utility btn-outline {
+  @apply px-5 py-2.5 cursor-pointer rounded-xl border-2 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer items-center;
+}
+
+@utility btn-ghost {
+  @apply flex items-center cursor-pointer gap-2 px-6 py-3 rounded-xl font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer;
+}
+
+@utility btn-primary {
+  @apply flex items-center gap-2 cursor-pointer px-8 py-3 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer;
+}
+
+@utility data-table {
+  @apply w-full border-collapse rounded-xl overflow-hidden border-2 border-slate-200 dark:border-slate-800;
+}
+
+@utility data-table-head {
+  @apply bg-slate-100 dark:bg-slate-800;
+}
+
+@utility data-table-th {
+  @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-800;
+}
+
+@utility data-table-row {
+  @apply border-b border-slate-200 cursor-pointer dark:border-slate-800 even:bg-slate-50 dark:even:bg-slate-800/40 odd:bg-white dark:odd:bg-slate-900 outline outline-2 outline-transparent hover:outline-primary/40 hover:bg-primary/5 dark:hover:bg-primary/10 transition-all;
+}
+
+@utility data-table-td {
+  @apply px-4 py-3 text-sm text-slate-700 dark:text-slate-300;
+}
+
+@utility company-avatar {
+  @apply w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0 select-none;
+}
+
+@utility status-badge {
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold;
+}
+
+@utility status-offered {
+  @apply text-green-700 bg-green-100 dark:text-green-400 dark:bg-green-950;
+}
+
+@utility status-interview {
+  @apply text-blue-700 bg-blue-100 dark:text-blue-400 dark:bg-blue-950;
+}
+
+@utility status-pending {
+  @apply text-amber-600 bg-amber-100 dark:text-amber-400 dark:bg-amber-950;
+}
+
+@utility status-rejected {
+  @apply text-rose-600 bg-rose-100 dark:text-rose-400 dark:bg-rose-950;
+}
+
+@utility action-link {
+  @apply text-primary text-sm font-semibold hover:underline cursor-pointer bg-transparent border-none p-0;
+}
+
+@utility action-link-muted {
+  @apply text-slate-400 dark:text-slate-600 text-sm cursor-not-allowed;
+}
+
+@utility table-footer {
+  @apply flex items-center justify-between px-4 pt-4 pb-4 text-sm text-slate-500 dark:text-slate-400;
+}
+
+@utility pagination-btn {
+  @apply w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed bg-white dark:bg-slate-900;
+}
+
+@utility filter-btn {
+    @apply px-4 py-1.5 rounded-full border border-gray-300 bg-white 
+           text-sm font-medium text-gray-600 cursor-pointer transition-all
+           hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50
+           active:scale-95 select-none;
+  }
+  
+  @utility filter-btn-active {
+    @apply border-blue-600 bg-blue-600 text-white shadow-md;
+  }
+
+@layer components {
+  .filter-select {
+    @apply h-[38px] pl-3 pr-8 py-1.5 text-sm font-medium 
+           bg-gray-50 border border-gray-300 rounded-lg
+           cursor-pointer appearance-none transition-all
+           hover:border-blue-400 hover:bg-white
+           focus:ring-2 focus:ring-blue-100 focus:border-blue-500 focus:outline-none;
+    
+    /* Adding a custom chevron icon via background-image */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.25rem;
+  }
+}

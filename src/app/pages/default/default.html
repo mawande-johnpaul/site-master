@@ -1,0 +1,169 @@
+<div
+  class="min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display"
+>
+  <!-- Nav -->
+  <header
+    class="flex items-center justify-between px-8 py-5 border-b border-slate-200 dark:border-slate-800"
+  >
+    <div class="flex items-center gap-2">
+      <div class="bg-primary rounded-lg size-8 flex items-center justify-center text-white">
+        <span class="material-symbols-rounded text-[18px]">track_changes</span>
+      </div>
+      <span class="font-black text-lg tracking-tight">Trackit</span>
+    </div>
+    <nav class="flex items-center gap-3">
+      <button
+        (click)="openLogin()"
+        class="px-5 py-2 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+      >
+        Log in
+      </button>
+      <button
+        (click)="openSignup()"
+        class="px-5 py-2 rounded-xl text-sm font-bold bg-primary text-white shadow-md shadow-primary/30 hover:scale-[1.03] active:scale-[0.97] transition-all"
+      >
+        Sign up free
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="flex flex-col items-center text-center px-6 pt-8 pb-20">
+    <span
+      class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6"
+    >
+      <span class="material-symbols-outlined text-[14px]">bolt</span>
+      Now with AI
+    </span>
+    <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-tight max-w-3xl">
+      Find <span class="text-primary">internships</span> <br />
+      or your next great <span class="text-primary">interns</span>
+    </h1>
+    <p class="mt-6 text-lg text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed">
+      Trackit is an all-in-one platform that helps students find the perfect internship and helps
+      recruiters find the best candidates — all while keeping your documents secure and private.
+      Automate your internship search or hiring process and get back to what really matters.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4 mt-10">
+      <button
+        (click)="openSignup()"
+        class="flex items-center gap-2 px-8 py-3.5 bg-primary text-white rounded-xl font-bold text-sm shadow-lg shadow-primary/30 hover:scale-[1.03] active:scale-[0.97] transition-all"
+      >
+        <span class="material-symbols-outlined text-[18px]">person_add</span>
+        I am a student
+      </button>
+      <button
+        (click)="openLogin()"
+        class="flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+      >
+        <span class="material-symbols-outlined text-[18px]">login</span>
+        I want to hire
+      </button>
+    </div>
+  </section>
+
+  <!-- Student Feature cards -->
+  <h3 class="page-heading max-w-5xl mx-auto mb-4 text-center">For students</h3>
+  <section class="max-w-5xl mx-auto px-6 pb-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card flex flex-col gap-3">
+        <div class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined">architecture</span>
+        </div>
+        <h3 class="font-bold text-base">Prepare</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Prepare and attach your documents in one click — your files are securely stored and only
+          shared with organizations you apply to.
+        </p>
+      </div>
+
+      <div class="card flex flex-col gap-3">
+        <div class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined">groups</span>
+        </div>
+        <h3 class="font-bold text-base">Smart Tracking</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          No more wondering if your documents were received or lost in the void. Our smart tracking system keeps you informed every step of the way.
+        </p>
+      </div>
+
+      <div class="card flex flex-col gap-3">
+        <div class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined">calendar_month</span>
+        </div>
+        <h3 class="font-bold text-base">Interviews</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Get notified when recruiters want to chat and coordinate interview slots directly through the platform — no back-and-forth emails required.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Employer Feature cards -->
+  <h3 class="page-heading max-w-5xl mx-auto mb-4 text-center">For employers</h3>
+  <section class="max-w-5xl mx-auto px-6 pb-24">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card flex flex-col gap-3">
+        <div class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined">create</span>
+        </div>
+        <h3 class="font-bold text-base">Create posts</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Create internship posts in minutes and share them on your website or social media to attract
+          more applicants.
+        </p>
+      </div>
+
+      <div class="card flex flex-col gap-3">
+        <div class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined">speed</span>
+        </div>
+        <h3 class="font-bold text-base">Quick updates</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          With one click, update the status of your applicants and keep them informed throughout the hiring process — no more lost emails or ghosting.
+        </p>
+      </div>
+
+      <div class="card flex flex-col gap-3">
+        <div class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined">calendar_month</span>
+        </div>
+        <h3 class="font-bold text-base">Interviews</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Coordinate interview slots directly through the platform — no back-and-forth emails
+          required.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA banner -->
+  <section
+    class="bg-primary/10 dark:bg-primary/5 border-t border-primary/20 py-16 px-6 text-center"
+  >
+    <h2 class="text-3xl font-black tracking-tight mb-4">Ready to simplify your workflow?</h2>
+    <p class="text-slate-500 dark:text-slate-400 mb-8 max-w-md mx-auto">
+      Join hundreds of recruiters and students who are already using Trackit to streamline their internship search and hiring process.
+    </p>
+    <a
+      (click)="openSignup()"
+      class="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/30 hover:scale-[1.03] active:scale-[0.97] transition-all cursor-pointer"
+    >
+      <span class="material-symbols-outlined text-[18px]">rocket</span>
+      Start for free today
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer
+    class="text-center py-8 text-xs text-slate-400 border-t border-slate-200 dark:border-slate-800"
+  >
+    &copy; 2026 Trackit &middot;
+    <button (click)="openLogin()" class="hover:text-primary transition-colors">Log in</button>
+    &middot;
+    <button (click)="openSignup()" class="hover:text-primary transition-colors">Sign up</button>
+  </footer>
+
+  <app-modal></app-modal>
+</div>

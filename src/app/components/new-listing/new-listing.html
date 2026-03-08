@@ -1,0 +1,199 @@
+<main class="flex-1 ml-64 p-8">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+        <div>
+          <h2 class="page-heading">Job Architect</h2>
+          <p class="page-subheading">Define and publish a new role to your talent pool.</p>
+        </div>
+        <div class="flex gap-3">
+          <button class="btn-outline">View Drafts</button>
+        </div>
+      </div>
+      <!-- Stepper -->
+      <div class="mb-10">
+        <div
+          class="flex items-center gap-0 w-full overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm"
+        >
+          <div
+            class="flex-1 flex flex-col items-center py-4 border-r border-slate-200 dark:border-slate-800 bg-primary/5 dark:bg-primary/10 relative"
+          >
+            <span class="step-label text-primary">Step 1</span>
+            <span class="text-sm font-bold text-slate-900 dark:text-white">Role Details</span>
+            <div class="absolute bottom-0 left-0 w-full h-1 bg-primary"></div>
+          </div>
+          <div
+            class="flex-1 flex flex-col items-center py-4 border-r border-slate-200 dark:border-slate-800 opacity-60"
+          >
+            <span class="step-label text-slate-400 dark:text-slate-500">Step 2</span>
+            <span class="text-sm font-bold text-slate-500 dark:text-slate-400">Hard Filters</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center py-4 opacity-60">
+            <span class="step-label text-slate-400 dark:text-slate-500">Step 3</span>
+            <span class="text-sm font-bold text-slate-500 dark:text-slate-400"
+              >Required Documents</span
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Form Section -->
+      <div class="space-y-8">
+        <!-- Step 1: Role Details -->
+        <section class="card">
+          <div class="section-header">
+            <span class="material-symbols-outlined text-primary">description</span>
+            <h3 class="section-heading">Step 1: Role Details</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="col-span-1">
+              <label class="field-label">Job Title</label>
+              <input
+                class="field-input"
+                placeholder="e.g. Software Engineering Intern"
+                type="text"
+              />
+            </div>
+            <div class="col-span-1">
+              <label class="field-label">Department</label>
+              <select class="field-input">
+                <option>Engineering</option>
+                <option>Design</option>
+                <option>Product Management</option>
+                <option>Marketing</option>
+              </select>
+            </div>
+            <div class="col-span-full">
+              <label class="field-label">Job Description</label>
+              <textarea
+                class="field-input"
+                placeholder="Describe the role, responsibilities, and impact..."
+                rows="6"
+              ></textarea>
+            </div>
+          </div>
+        </section>
+        <!-- Step 2: Hard Filters -->
+        <section class="card">
+          <div class="section-header">
+            <span class="material-symbols-outlined text-primary">filter_alt</span>
+            <h3 class="section-heading">Step 2: Hard Filters</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label class="field-label">Minimum GPA</label>
+              <input class="field-input" placeholder="3.5" step="0.1" type="number" />
+            </div>
+            <div>
+              <label class="field-label">Year of Study</label>
+              <select class="field-input">
+                <option>Junior (3rd Year)</option>
+                <option>Senior (4th Year)</option>
+                <option>Masters Student</option>
+                <option>PhD Candidate</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label">Location Preference</label>
+              <select class="field-input">
+                <option>Remote</option>
+                <option>On-site</option>
+                <option>Hybrid</option>
+              </select>
+            </div>
+            <div class="col-span-full">
+              <label class="field-label">Specific Course Requirements</label>
+              <div class="flex flex-wrap gap-2 mb-3">
+                <span class="tag">
+                  Data Structures
+                  <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+                </span>
+                <span class="tag">
+                  Algorithms
+                  <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+                </span>
+              </div>
+              <input
+                class="field-input"
+                placeholder="Add a course (e.g. CS101) and press enter"
+                type="text"
+              />
+            </div>
+          </div>
+        </section>
+        <!-- Step 3: Required Documents -->
+        <section class="card">
+          <div class="section-header">
+            <span class="material-symbols-outlined text-primary">upload_file</span>
+            <h3 class="section-heading">Step 3: Required Documents</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <label class="doc-card">
+              <input
+                checked
+                class="rounded text-primary focus:ring-primary size-5 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                type="checkbox"
+              />
+              <div class="flex flex-col">
+                <span class="font-bold text-sm">Resume / CV</span>
+                <span class="text-xs text-slate-500">Essential for all applicants</span>
+              </div>
+            </label>
+            <label class="doc-card">
+              <input
+                checked
+                class="rounded text-primary focus:ring-primary size-5 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                type="checkbox"
+              />
+              <div class="flex flex-col">
+                <span class="font-bold text-sm">Academic Transcript</span>
+                <span class="text-xs text-slate-500">Official or unofficial copy</span>
+              </div>
+            </label>
+            <label class="doc-card">
+              <input
+                class="rounded text-primary focus:ring-primary size-5 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                type="checkbox"
+              />
+              <div class="flex flex-col">
+                <span class="font-bold text-sm">Cover Letter</span>
+                <span class="text-xs text-slate-500">Personalize application</span>
+              </div>
+            </label>
+            <label class="doc-card">
+              <input
+                class="rounded text-primary focus:ring-primary size-5 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                type="checkbox"
+              />
+              <div class="flex flex-col">
+                <span class="font-bold text-sm">Portfolio / GitHub</span>
+                <span class="text-xs text-slate-500">For design or dev roles</span>
+              </div>
+            </label>
+            <label class="doc-card">
+              <input
+                class="rounded text-primary focus:ring-primary size-5 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                type="checkbox"
+              />
+              <div class="flex flex-col">
+                <span class="font-bold text-sm">Letter of Recommendation</span>
+                <span class="text-xs text-slate-500">Faculty or previous manager</span>
+              </div>
+            </label>
+          </div>
+        </section>
+        <!-- Form Actions -->
+        <div
+          class="flex items-center justify-end gap-4 py-8 border-t border-slate-200 dark:border-slate-800 mt-10"
+        >
+          <button class="btn-ghost">
+            <span class="material-symbols-outlined text-[20px]">save</span>
+            Save Draft
+          </button>
+          <button class="btn-primary">
+            <span class="material-symbols-outlined text-[20px]">rocket</span>
+            Publish Posting
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>

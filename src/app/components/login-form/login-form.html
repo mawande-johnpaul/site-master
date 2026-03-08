@@ -1,0 +1,53 @@
+<div class="p-8">
+
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <div class="mx-auto mb-4 bg-primary rounded-xl size-12 flex items-center justify-center text-white">
+      <span class="material-symbols-outlined">lock</span>
+    </div>
+    <h2 class="text-2xl font-black tracking-tight text-slate-900 dark:text-white">Welcome back</h2>
+    <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Log in to your recruiter portal</p>
+  </div>
+
+  <form (ngSubmit)="submit()" class="space-y-5">
+
+    <div>
+      <label class="field-label">Email address</label>
+      <input
+        [(ngModel)]="email"
+        name="email"
+        type="email"
+        class="field-input"
+        placeholder="you@company.com"
+        required
+      />
+    </div>
+
+    <div>
+      <div class="flex items-center justify-between mb-2">
+        <label class="field-label mb-0">Password</label>
+        <a href="#" class="text-xs text-primary font-bold hover:underline">Forgot password?</a>
+      </div>
+      <input
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        class="field-input"
+        placeholder="••••••••"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn-primary w-full justify-center mt-2">
+      <span class="material-symbols-outlined text-[18px]">login</span>
+      Log in
+    </button>
+
+  </form>
+
+  <p class="text-center text-sm text-slate-500 dark:text-slate-400 mt-6">
+    Don't have an account?
+    <button (click)="openSignup()" class="text-primary font-bold hover:underline">Sign up free</button>
+  </p>
+
+</div>

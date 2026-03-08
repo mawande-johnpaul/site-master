@@ -1,0 +1,47 @@
+<div
+  class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200 flex min-h-screen"
+>
+  <app-sidebar></app-sidebar>
+  <main class="flex-1 ml-64 p-8">
+    <h2 class="page-heading">Documents</h2>
+    <div>Your five documents are secured and only shared with organizations you apply to.</div>
+    <div class="flex flex-wrap items-start gap-4 justify-start mt-8">
+      @for (doc of context.uploadedDocuments(); track doc.id) {
+        <div
+          class="card w-full sm:w-[48%] cursor-pointer lg:w-[18%] min-w-[150px] flex flex-col items-center justify-center text-center p-4 border rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow "
+        >
+          <span class="material-symbols-outlined text-[32px] text-gray-400 mb-2 select-none">
+            @if (['pdf', 'docx', 'txt', 'md'].includes(doc.type)) {
+              description
+            } @else if (['jpg', 'jpeg', 'png', 'gif'].includes(doc.type)) {
+              image
+            } @else {
+              draft
+            }
+          </span>
+
+          <div class="w-full text-sm font-medium text-gray-700 truncate px-1" [title]="doc.name">
+            {{ doc.name }}
+          </div>
+
+          <div class="text-[10px] font-bold uppercase tracking-wider text-blue-600 mt-1">
+            {{ doc.category }}
+          </div>
+        </div>
+      }
+    </div>
+    <div
+      class="card w-full min-w-[150px] grow-0 flex-col items-center justify-center text-center p-4 border-primary rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer hover:bg-primary/20 mt-8"
+    >
+      <span
+        class="material-symbols-outlined text-[32px] text-gray-400 mb-2 select-none text-primary"
+        >upload</span
+      >
+      <div class="w-full text-sm font-medium text-gray-700 truncate px-1">UPLOAD</div>
+
+      <div class="text-[10px] font-bold uppercase tracking-wider text-blue-600 mt-1">
+        IMAGE or DOC
+      </div>
+    </div>
+  </main>
+</div>

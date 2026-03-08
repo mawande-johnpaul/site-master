@@ -1,0 +1,86 @@
+<div class="p-8">
+
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <div class="mx-auto mb-4 bg-primary rounded-xl size-12 flex items-center justify-center text-white">
+      <span class="material-symbols-outlined">person_add</span>
+    </div>
+    <h2 class="text-2xl font-black tracking-tight text-slate-900 dark:text-white">Create an account</h2>
+    <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Start hiring student talent today</p>
+  </div>
+
+  <form (ngSubmit)="submit()" class="space-y-5">
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="field-label">First name</label>
+        <input
+          [(ngModel)]="firstName"
+          name="firstName"
+          type="text"
+          class="field-input"
+          placeholder="Jane"
+          required
+        />
+      </div>
+      <div>
+        <label class="field-label">Last name</label>
+        <input
+          [(ngModel)]="lastName"
+          name="lastName"
+          type="text"
+          class="field-input"
+          placeholder="Smith"
+          required
+        />
+      </div>
+    </div>
+
+    <div>
+      <label class="field-label">Work email</label>
+      <input
+        [(ngModel)]="email"
+        name="email"
+        type="email"
+        class="field-input"
+        placeholder="you@company.com"
+        required
+      />
+    </div>
+
+    <div>
+      <label class="field-label">Company / University</label>
+      <input
+        [(ngModel)]="company"
+        name="company"
+        type="text"
+        class="field-input"
+        placeholder="Acme Corp"
+      />
+    </div>
+
+    <div>
+      <label class="field-label">Password</label>
+      <input
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        class="field-input"
+        placeholder="••••••••"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn-primary w-full justify-center mt-2" >
+      <span class="material-symbols-outlined text-[18px]">rocket</span>
+      Create account
+    </button>
+
+  </form>
+
+  <p class="text-center text-sm text-slate-500 dark:text-slate-400 mt-6">
+    Already have an account?
+    <button (click)="openLogin()" class="text-primary font-bold hover:underline">Log in</button>
+  </p>
+
+</div>
